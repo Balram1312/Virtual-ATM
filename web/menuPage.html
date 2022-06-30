@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+
+<html>
+   
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-image: url('main_bck.JPG');
+        background-repeat: no-repeat; 
+    }    
+    .header{
+        width: 700x;
+        height: 100px;
+    }
+    .header h1{
+        font-size: 80px;
+        text-align: center;
+        color: #FFD700;
+    }    
+    
+    
+       .button {
+          appearance: none;
+          background-color: #00b4fc;
+          border: 2px solid #00b4fc;
+          border-radius: 15px;
+          box-sizing: border-box;
+          color: #FFFFFF;
+          cursor: pointer;
+          display: inline-block;
+          font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          font-size: 25px;
+          font-weight: 800;
+          line-height: normal;
+          margin: 0;
+          min-height: 60px;
+          min-width: 0;
+          outline: none;
+          padding: 16px 24px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          width: 200px;
+          height:25px;
+          will-change: transform;
+        }
+
+        .button:disabled {
+          pointer-events: none;
+        }
+
+        .button:hover {
+          box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+          transform: translateY(-2px);
+          color: #FFD700;
+        }
+
+        .button:active {
+          box-shadow: none;
+          transform: translateY(0);
+        }
+        .empty{
+            width:200px ;
+            
+        }
+        .empty_row{
+            height:35px;
+        }
+        .button_panel{
+            margin-left: 9%;
+            margin-top: 5%;
+        }
+    </style>
+    </head>
+    <body>
+       <div class='container'>
+            <div class="header">
+                <h1>GOLD BANK</h1><br>
+            </div>
+           <div class="button_panel">
+                <table>
+                 <tr>
+                     <td><button onclick="location.href='MP_withdraw.html'" class="button">Withdraw</button> 
+                     <td><div class="empty"></div></td><td>
+                     <button class="button" onclick="location.href='MP_deposit.html'">Deposit</button></td>
+                 </tr>
+                 <tr class="empty_row"></tr>
+                 <tr>
+                     <td><button class="button" onclick="location.href='MP_mobilerecharge.html'">Recharge</button></td>
+                     <td><div class="empty"></div></td>
+                     <td><button class="button" onclick="location.href='BalanceServlet'">Balance</button></td>
+                 </tr>
+                 <tr class="empty_row"></tr>
+                 <tr>
+                     <td><button class="button" onclick="location.href='MP_transfer.html'">Transfer</button></td>
+                     <td><div class="empty"></div></td>
+                     <td><button class="button" onclick="location.href='MP_changepin.html'">Change Pin</button></td>
+                 </tr>
+                </table>
+           </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-image: url('main_bck.JPG');
+        background-repeat: no-repeat; 
+    }    
+    .container{
+        width: 700x;
+        height: 600px;
+        
+    }
+    .container h1{
+        font-size: 80px;
+        text-align: center;
+        color: #FFD700;
+    }    
+    .container h3{
+        font-size: 40px;
+        color: #FFD700;
+        text-align: center;
+    }
+    input[type=text] {
+      text-align: center;
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 3px solid #ccc;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      outline: none;
+    }
+
+    input[type=text]:focus {
+      border: 3px solid #555;
+    }
+    .s_container{
+        margin-top: 20px;
+    }
+    .s_container button{
+        margin-top: 5%;
+        margin-left: 42%;
+        width: 120px;
+        height:30px;
+    }
+    .s_container h5{
+        text-align: center;
+        color:#FFD700;
+        font-size:15px ;
+    }
+    </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class="s_container">
+                <h1>GOLD BANK</h1><br>
+                <h3>TRANSFER </h3><br><br><br>  
+                <form action="TransferServlet" method="post">
+                <h5>Enter Account number</h5>
+                <input type="text" style="margin-left: 175px" name='acco_other' ><br>
+                <h5>Enter Amount</h5>
+                <input type="text" style="margin-left: 175px" name='amount' >
+                <button value="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+

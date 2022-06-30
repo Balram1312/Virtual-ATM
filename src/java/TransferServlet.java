@@ -1,0 +1,142 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ *
+ * @author Balra
+ */
+public class TransferServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+     
+        
+        PrintWriter out = response.getWriter();  
+        String account_other = request.getParameter("acco_other");
+        String amount = request.getParameter("amount");
+
+        long ao = Long.parseLong(account_other);
+        Double am = Double.parseDouble(amount);
+        
+        HttpSession session = request.getSession(false);
+        String s  = (String)session.getAttribute("acco");
+        double acc = Double.parseDouble(s);
+        
+        if(LoginDao.validate_acc(ao))
+        {
+            try
+                {
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","system","oracle");
+                    String sql_deducted_self_account;
+                    sql_deducted_self_account = "update atm_users set amount = amount-? where acc = ?";
+                    PreparedStatement ps=con.prepareStatement(sql_deducted_self_account);
+                    ps.setDouble(1,am);
+                    ps.setDouble(2, acc);
+                    ps.executeQuery();
+                    
+                   Class.forName("oracle.jdbc.driver.OracleDriver");
+                    Connection con1=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","system","oracle");
+                    String add_to_others_account;
+                    add_to_others_account = "update atm_users set amount = amount+? where acc = ?";
+                    PreparedStatement ps1=con1.prepareStatement(add_to_others_account);
+                    ps1.setDouble(1,am);
+                    ps1.setDouble(2, ao);
+                    ps1.executeQuery();
+                    
+                out.print("<html><head><style>");
+               out.println("*{margin: 0;padding: 0;}");
+               out.println("body{background-image: url('main_bck.JPG');");
+               out.println(" background-repeat: no-repeat;}");    
+              out.println(".container{   width: 700x; height: 600px;}");
+              out.println(".container h1{font-size: 80px;text-align: center;color: #FFD700;}");    
+              out.println(".container h3{font-size: 40px;color: #FFD700;text-align: center;}");
+              out.println("input[type=password] {text-align: center;width: 50%;");
+              out.println("padding: 12px 20px;margin: 8px 0;box-sizing: border-box;border: 3px solid #ccc;");
+              out.println("-webkit-transition: 0.5s;transition: 0.5s;outline: none;}");
+              out.println("input[type=password]:focus {border: 3px solid #555;}");
+              out.println(".s_container{margin-top: 90px;}");
+              out.println(".s_container button{margin-top: 5%;margin-left: 42%;width: 120px;height:35px;}");
+              out.println("</style></head><body>");
+              out.println("<div class='container'><div class='s_container'>");
+              out.println("<br>");
+              out.println("<h3>Amount Transferred Successfully </h3><br><br><br>");
+              
+              out.println("</div></div></body></html>");
+              response.setHeader("Refresh", "3; URL=main.html");
+                }
+                catch(ClassNotFoundException | SQLException e)
+                {
+                    System.out.println(e);
+                }
+        }
+        else
+        {
+            
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
